@@ -1,34 +1,10 @@
-import express, {Response, Request} from 'express'
-import {getPosts, isLogin} from '../Endpoints/userEndpoints'
+import express from 'express';
+import Controller from '../controllers/Controller'
+const Router = express.Router();
 
- const route = express.Router()
+Router.post('/login', Controller.user.login)
+Router.post('/singUp', Controller.user.create)
+Router.get('/user', Controller.user.getById)
+Router.put('/profile', Controller.user.edit)
 
- route.get("/posts", async (req:Request, res:Response) => {
-    try {
-
-        const user = await getPosts(req, res)
-        res.status(200)
-            .send({ users: user })
-
-    } catch (err) {
-        res
-            .status(400)
-            .send({ message: "Ops! Something is wrong. Try again later" })
-    }
-})
-
-
-route.post("/login", async (req:Request, res:Response) => {
-    try {
-        const isLoginBool = await isLogin(req, res)
-        res.status(200)
-            .send({ confirm: isLoginBool==true })
-
-    } catch (err) {
-        res
-            .status(400)
-            .send({ message: "Ops! Something is wrong. Try again later" })
-    }
-})
-
-export {route as userRoute} 
+export {Router as userRouter}

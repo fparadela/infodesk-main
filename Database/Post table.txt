@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS `infodesk`.`posts` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  `Price` FLOAT NOT NULL,
+  `Address` VARCHAR(255),
+  `typeOfAccommodation` ENUM('Room', 'Studio', 'Apartment') NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`))

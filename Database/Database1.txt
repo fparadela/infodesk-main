@@ -1,0 +1,372 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema infodesk
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema infodesk
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `infodesk` DEFAULT CHARACTER SET utf8mb4 ;
+USE `infodesk` ;
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`registrationdata`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`registrationdata` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `FirstName` VARCHAR(100) NOT NULL,
+  `LastName` VARCHAR(100) NOT NULL,
+  `Email` VARCHAR(100) NOT NULL,
+  `UserName` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 61
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`videos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`videos` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Title` VARCHAR(50) NULL DEFAULT NULL,
+  `Date` DATETIME NOT NULL,
+  `Url` VARCHAR(50) NOT NULL,
+  `Topic` ENUM('Webinar', 'Events', 'Work', 'Bureaucracy', 'Finance', 'Culture & Life in NL') NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 16
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`favoritevideo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`favoritevideo` (
+  `UserId` INT(11) NOT NULL,
+  `VideoId` INT(11) NOT NULL,
+  PRIMARY KEY (`UserId`, `VideoId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`posts`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`posts` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  `Price` FLOAT NOT NULL,
+  `typeOfAccommodation` ENUM('Room', 'Studio', 'Apartment') NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 41
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`postslevelcomments1`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`postslevelcomments1` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `PostId` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 41
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likepostslevelcomments1`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likepostslevelcomments1` (
+  `Comment1Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment1Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`postslevelcomments2`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`postslevelcomments2` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Comment1Id` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 83
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likepostslevelcomments2`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likepostslevelcomments2` (
+  `Comment2Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment2Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`postslevelcomments3`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`postslevelcomments3` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Comment2Id` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 23
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likepostslevelcomments3`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likepostslevelcomments3` (
+  `Comment3Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment3Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`stories`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`stories` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Title` VARCHAR(50) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  `Topic` ENUM('Documentation', 'Culture', 'Find a roommate', 'Student loan', 'Banks', 'Law', 'Work', 'Bureaucracy', 'Daily basis en the NL', 'Transportation') NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`storieslevelcomments1`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`storieslevelcomments1` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `StoryId` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 58
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likestorieslevelcomments1`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likestorieslevelcomments1` (
+  `Comment1Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment1Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`storieslevelcomments2`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`storieslevelcomments2` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Comment1Id` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 85
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likestorieslevelcomments2`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likestorieslevelcomments2` (
+  `Comment2Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment2Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`storieslevelcomments3`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`storieslevelcomments3` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Comment2Id` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 44
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likestorieslevelcomments3`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likestorieslevelcomments3` (
+  `Comment3Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment3Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likestory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likestory` (
+  `StoryId` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `StoryId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likevideo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likevideo` (
+  `VideoId` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `VideoId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`videoslevelcomments1`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`videoslevelcomments1` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `VideoId` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likevideoslevelcomments1`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likevideoslevelcomments1` (
+  `Comment1Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment1Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`videoslevelcomments2`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`videoslevelcomments2` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Comment1Id` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 80
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likevideoslevelcomments2`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likevideoslevelcomments2` (
+  `Comment2Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment2Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`videoslevelcomments3`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`videoslevelcomments3` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `Comment2Id` INT(11) NOT NULL,
+  `Text` TEXT NOT NULL,
+  `Date` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 19
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`likevideoslevelcomments3`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`likevideoslevelcomments3` (
+  `Comment3Id` INT(11) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+  `liked` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`UserId`, `Comment3Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `infodesk`.`login`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `infodesk`.`login` (
+  `Email` VARCHAR(100) NOT NULL,
+  `Password` VARCHAR(15) NOT NULL,
+  `Id` INT(11) NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

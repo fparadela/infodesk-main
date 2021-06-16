@@ -1,0 +1,17 @@
+INSERT INTO `infodesk`.`videos` 
+(`Id`, `Title`, Date, `Url`) 
+VALUES (1, 'E', current_date(),'1.mp4'),
+(2, 'E', current_date(),'2.mp4'),
+(3, 'E', current_date(),'3.mp4'),
+(4, 'E', current_date(),'4.mp4'),
+(5, 'E', current_date(),'5.mp4'),
+(6, 'Figo', current_date(),'6.mp4'),
+(7, 'Goiaba', current_date(),'7.mp4'),
+(8, 'Hawthorn', current_date(),'8.mp4'),
+(9, 'Ingá', current_date(),'9.mp4'),
+(10, 'Jamelão', current_date(),'10.mp4'),
+(11, 'Kiwi', current_date(),'11.mov'),
+(12, 'Laranja', current_date(),'12.mp4'),
+(13, 'Maça', current_date(),'13.mp4'),
+(14, 'Noz', current_date(),'14.mp4'),
+(15, 'Pêssego', current_date(),'15.mov')
